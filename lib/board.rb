@@ -1,17 +1,61 @@
 # Represents the game board
 class Board
-  attr_reader :code
+  attr_accessor :players
+  attr_reader :code, :turn_number, :winner
 
   BOARD_SIZE = 12
   def initialize
-    @board = array.new(Board::BOARD_SIZE)
+    @board = Array.new(Board::BOARD_SIZE)
+    @winner = nil
+    @turn_number = 0
+    @giving_feedback = false
   end
 
   def store_code(code)
     self.code = code
   end
 
+  def insert(pegs)
+    if giving_feedback?
+      board[turn_number][:feedback] = pegs
+      check_for_winner
+      self.turn_number += 1
+    else
+      board[turn_number] = { guess: pegs, feedback: [] }
+    end
+    self.giving_feedback = !giving_feedback
+  end
+
+  def last_guess
+    board[turn_number][:guess]
+  end
+
+  def display
+    board.reverse.each do |row|
+      puts row
+    end
+  end
+
+  def winner?
+    winner != nil
+  end
+
   private
 
-  attr_writer :code
+  def giving_feedback?
+    giving_feedback
+  end
+
+  def check_for_winner
+    fb = board[turn_number][:feedback]
+    if fb.count('B') == 4
+      puts "feedback: #{fb}"
+      self.winner = players[:codebreaker]
+    elsif turn_number == Board::BOARD_SIZE
+      self.winner = players[:codemaker]
+    end
+  end
+
+  attr_accessor :board, :giving_feedback
+  attr_writer :code, :turn_number, :winner
 end
