@@ -27,6 +27,8 @@ class ComputerPlayer
   end
 
   def guess
+    feedback = board.last_feedback
+    self.canditates ||= create_candidates
     guess = Array.new(4)
     random = Random.new
     guess.each_index { |index| guess[index] = random.rand(1..6) }
@@ -39,5 +41,9 @@ class ComputerPlayer
 
   private
 
-  attr_accessor :board, :code
+  attr_accessor :board, :code, :canditates
+
+  def create_candidates
+    [1, 2, 3, 4, 5, 6].repeated_permutation(4).to_a
+  end
 end

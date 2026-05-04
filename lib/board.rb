@@ -30,6 +30,10 @@ class Board
     board[turn_number][:guess]
   end
 
+  def last_feedback
+    board[turn_number - 1][:feedback] if board[turn_number - 1]
+  end
+
   def display
     board.reverse.each do |row|
       puts row

@@ -5,7 +5,7 @@ class HumanPlayer
   end
 
   def create_code
-    print 'What is your secret code?'
+    print 'What is your secret code? '
     self.code = gets.chomp.to_i.digits.reverse
     code
   end
