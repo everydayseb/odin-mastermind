@@ -51,7 +51,7 @@ class Board
     if fb.count('B') == 4
       puts "feedback: #{fb}"
       self.winner = players[:codebreaker]
-    elsif turn_number == Board::BOARD_SIZE
+    elsif turn_number == Board::BOARD_SIZE - 1
       self.winner = players[:codemaker]
     end
   end
