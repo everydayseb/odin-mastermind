@@ -1,7 +1,7 @@
 # Represents the game board
 class Board
   attr_accessor :players
-  attr_reader :turn_number, :winner
+  attr_reader :winner
 
   BOARD_SIZE = 12
   def initialize
@@ -46,6 +46,9 @@ class Board
 
   private
 
+  attr_accessor :board, :code, :giving_feedback, :turn_number
+  attr_writer :winner
+
   def giving_feedback?
     giving_feedback
   end
@@ -58,7 +61,4 @@ class Board
       self.winner = players[:codemaker]
     end
   end
-
-  attr_accessor :board, :code, :giving_feedback
-  attr_writer :turn_number, :winner
 end
