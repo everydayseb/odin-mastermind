@@ -1,7 +1,7 @@
 # Represents the game board
 class Board
   attr_accessor :players
-  attr_reader :code, :turn_number, :winner
+  attr_reader :turn_number, :winner
 
   BOARD_SIZE = 12
   def initialize
@@ -36,6 +36,10 @@ class Board
     end
   end
 
+  def show_code
+    code if winner?
+  end
+
   def winner?
     winner != nil
   end
@@ -55,6 +59,6 @@ class Board
     end
   end
 
-  attr_accessor :board, :giving_feedback
-  attr_writer :code, :turn_number, :winner
+  attr_accessor :board, :code, :giving_feedback
+  attr_writer :turn_number, :winner
 end

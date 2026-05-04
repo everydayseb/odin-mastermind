@@ -15,5 +15,5 @@ until board.winner?
   board.display
 end
 
-puts "Code was #{board.code}"
+puts "Code was #{board.show_code}"
 puts "#{board.winner} won"
