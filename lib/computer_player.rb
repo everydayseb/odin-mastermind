@@ -26,6 +26,13 @@ class ComputerPlayer
     feedback.sort
   end
 
+  def guess
+    guess = Array.new(4)
+    random = Random.new
+    guess.each_index { |index| guess[index] = random.rand(1..6) }
+    guess
+  end
+
   def to_s
     'Computer'
   end
