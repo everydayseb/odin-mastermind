@@ -49,7 +49,6 @@ class Board
   def check_for_winner
     fb = board[turn_number][:feedback]
     if fb.count('B') == 4
-      puts "feedback: #{fb}"
       self.winner = players[:codebreaker]
     elsif turn_number == Board::BOARD_SIZE - 1
       self.winner = players[:codemaker]

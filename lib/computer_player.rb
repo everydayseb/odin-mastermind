@@ -8,7 +8,6 @@ class ComputerPlayer
     self.code = Array.new(4)
     random = Random.new
     code.each_index { |index| code[index] = random.rand(1..6) }
-    puts "Code is #{code}"
     code
   end
 
