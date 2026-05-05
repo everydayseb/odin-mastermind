@@ -17,7 +17,7 @@ class HumanPlayer
   end
 
   def feedback
-    puts "Guess was #{board.current_guess}. "
+    puts "Guess was #{board.current_guess.join}. Code is #{code.join}."
     print 'Feedback: '
     response = gets.chomp.upcase.chars.sort
     until feedback_is_valid?(response)
