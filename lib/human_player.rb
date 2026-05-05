@@ -35,6 +35,7 @@ class HumanPlayer
       print 'What\'s your guess? '
       guess = gets.chomp.to_i.digits.reverse
     end
+    guess
   end
 
   def to_s
