@@ -21,7 +21,7 @@ class HumanPlayer
     print 'Feedback: '
     response = gets.chomp.upcase.chars.sort
     until feedback_is_valid?(response)
-      puts 'Feedback can only contain the characters \'B\' or \'W\' and be under 4 characters long'
+      print 'Feedback (B or W or empty): '
       response = gets.chomp.upcase.chars.sort
     end
     response
