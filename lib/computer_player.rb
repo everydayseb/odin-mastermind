@@ -11,8 +11,7 @@ class ComputerPlayer
     code
   end
 
-  def feedback
-    guess = board.current_guess
+  def feedback(code = self.code, guess = board.current_guess)
     feedback = []
 
     guess.each_with_index do |digit, index|
@@ -56,15 +55,6 @@ class ComputerPlayer
   end
 
   def feedback_matches?(last_guess, candidate, last_feedback)
-    candidate_feedback = []
-    last_guess.each_with_index do |digit, index|
-      if candidate[index] == digit
-        candidate_feedback.push 'B'
-      elsif candidate.include? digit
-        candidate_feedback.push 'W'
-      end
-    end
-
-    candidate_feedback.sort == last_feedback
+    feedback(candidate, last_guess) == last_feedback
   end
 end
