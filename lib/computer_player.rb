@@ -51,7 +51,7 @@ class ComputerPlayer
   attr_accessor :board, :code, :canditates
 
   def create_candidates
-    [1, 2, 3, 4, 5, 6].repeated_permutation(4).to_a
+    [1, 2, 3, 4, 5, 6].repeated_permutation(4).to_a.shuffle
   end
 
   def feedback_matches?(last_guess, candidate, last_feedback)
