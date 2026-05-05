@@ -6,19 +6,35 @@ class HumanPlayer
 
   def create_code
     print 'What is your secret code? '
-    self.code = gets.chomp.to_i.digits.reverse
+    code = gets.chomp.to_i.digits.reverse
+    until code_is_valid?(code)
+      puts 'Code must be 4 digits long and only include the numbers 1-6.'
+      print 'What is your secret code? '
+      code = gets.chomp.to_i.digits.reverse
+    end
+    self.code = code
     code
   end
 
   def feedback
     puts "Guess was #{board.current_guess}. "
     print 'Feedback: '
-    gets.chomp.upcase.chars.sort
+    response = gets.chomp.upcase.chars.sort
+    until feedback_is_valid?(response)
+      puts 'Feedback can only contain the characters \'B\' or \'W\' and be under 4 characters long'
+      response = gets.chomp.upcase.chars.sort
+    end
+    response
   end
 
   def guess
     print 'What\'s your guess? '
-    gets.chomp.to_i.digits.reverse
+    guess = gets.chomp.to_i.digits.reverse
+    until code_is_valid?(guess)
+      puts 'Code is 4 digits long and only includes the numbers 1-6.'
+      print 'What\'s your guess? '
+      guess = gets.chomp.to_i.digits.reverse
+    end
   end
 
   def to_s
@@ -28,4 +44,16 @@ class HumanPlayer
   private
 
   attr_accessor :code, :board
+
+  def code_is_valid?(code)
+    code.all? { |digit| digit.between?(1, 6) } && code.size == 4
+  end
+
+  def feedback_is_valid?(feedback)
+    return false if feedback.size > 4
+    return true if feedback.empty?
+    return false if feedback.none?('B') && feedback.none?('W')
+
+    true
+  end
 end
