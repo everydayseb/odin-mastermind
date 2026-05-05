@@ -26,19 +26,6 @@ class ComputerPlayer
     feedback.sort
   end
 
-  def feedback_matches?(last_guess, candidate, last_feedback)
-    candidate_feedback = []
-    last_guess.each_with_index do |digit, index|
-      if candidate[index] == digit
-        candidate_feedback.push 'B'
-      elsif candidate.include? digit
-        candidate_feedback.push 'W'
-      end
-    end
-
-    candidate_feedback.sort == last_feedback
-  end
-
   def guess
     candidates = self.canditates ||= create_candidates
     if board.turn_number.zero?
@@ -66,5 +53,18 @@ class ComputerPlayer
 
   def create_candidates
     [1, 2, 3, 4, 5, 6].repeated_permutation(4).to_a.reverse
+  end
+
+  def feedback_matches?(last_guess, candidate, last_feedback)
+    candidate_feedback = []
+    last_guess.each_with_index do |digit, index|
+      if candidate[index] == digit
+        candidate_feedback.push 'B'
+      elsif candidate.include? digit
+        candidate_feedback.push 'W'
+      end
+    end
+
+    candidate_feedback.sort == last_feedback
   end
 end
