@@ -42,7 +42,8 @@ class Board
 
   def display
     board.reverse.each do |row|
-      puts row
+      puts "#{row[:guess].join} | #{row[:feedback].join}" if row
+      puts '---- | -' unless row
     end
   end
 

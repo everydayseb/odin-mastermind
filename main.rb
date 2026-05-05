@@ -20,6 +20,7 @@ end
 board.players = { codemaker: codemaker, codebreaker: codebreaker }
 
 board.store_code(codemaker.create_code)
+board.display
 
 until board.winner?
   board.insert(codebreaker.guess)
