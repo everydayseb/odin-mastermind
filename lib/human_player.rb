@@ -19,12 +19,12 @@ class HumanPlayer
   def feedback
     puts "Guess was #{board.current_guess.join}. Code is #{code.join}."
     print 'Feedback: '
-    response = gets.chomp.upcase.chars.sort
+    response = gets.chomp
     until feedback_is_valid?(response)
       print 'Feedback (B or W or empty): '
-      response = gets.chomp.upcase.chars.sort
+      response = gets.chomp
     end
-    response
+    response.upcase.chars.sort
   end
 
   def guess
@@ -50,6 +50,7 @@ class HumanPlayer
   end
 
   def feedback_is_valid?(feedback)
+    feedback = feedback.upcase.chars.sort
     return false if feedback.size > 4
     return true if feedback.empty?
     return false if feedback.none?('B') && feedback.none?('W')
