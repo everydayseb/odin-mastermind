@@ -12,7 +12,7 @@ class ComputerPlayer
   end
 
   def feedback
-    guess = board.last_guess
+    guess = board.current_guess
     feedback = []
 
     guess.each_with_index do |digit, index|
@@ -26,13 +26,34 @@ class ComputerPlayer
     feedback.sort
   end
 
+  def feedback_matches?(last_guess, candidate, last_feedback)
+    candidate_feedback = []
+    last_guess.each_with_index do |digit, index|
+      if candidate[index] == digit
+        candidate_feedback.push 'B'
+      elsif candidate.include? digit
+        candidate_feedback.push 'W'
+      end
+    end
+
+    candidate_feedback.sort == last_feedback
+  end
+
   def guess
-    feedback = board.last_feedback
-    self.canditates ||= create_candidates
-    guess = Array.new(4)
-    random = Random.new
-    guess.each_index { |index| guess[index] = random.rand(1..6) }
-    guess
+    candidates = self.canditates ||= create_candidates
+    if board.turn_number.zero?
+      candidates.delete([1, 1, 2, 2])
+      return [1, 1, 2, 2]
+    end
+
+    candidates.select! do |candidate|
+      feedback_matches?(board.last_guess, candidate, board.last_feedback)
+    end
+
+    # puts 'Candidates list'  # debug
+    # p candidates            # debug
+
+    candidates.pop
   end
 
   def to_s
@@ -44,6 +65,6 @@ class ComputerPlayer
   attr_accessor :board, :code, :canditates
 
   def create_candidates
-    [1, 2, 3, 4, 5, 6].repeated_permutation(4).to_a
+    [1, 2, 3, 4, 5, 6].repeated_permutation(4).to_a.reverse
   end
 end

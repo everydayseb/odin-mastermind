@@ -11,9 +11,9 @@ class HumanPlayer
   end
 
   def feedback
-    puts "Guess was #{board.last_guess}. "
+    puts "Guess was #{board.current_guess}. "
     print 'Feedback: '
-    gets.chomp.chars.sort
+    gets.chomp.upcase.chars.sort
   end
 
   def guess

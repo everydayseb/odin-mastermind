@@ -1,7 +1,7 @@
 # Represents the game board
 class Board
   attr_accessor :players
-  attr_reader :winner
+  attr_reader :winner, :turn_number
 
   BOARD_SIZE = 12
   def initialize
@@ -26,8 +26,14 @@ class Board
     self.giving_feedback = !giving_feedback
   end
 
-  def last_guess
+  def current_guess
     board[turn_number][:guess]
+  end
+
+  def last_guess
+    guess = []
+    guess = board[turn_number - 1][:guess] if board[turn_number - 1]
+    guess
   end
 
   def last_feedback
@@ -50,8 +56,8 @@ class Board
 
   private
 
-  attr_accessor :board, :code, :giving_feedback, :turn_number
-  attr_writer :winner
+  attr_accessor :board, :code, :giving_feedback
+  attr_writer :winner, :turn_number
 
   def giving_feedback?
     giving_feedback
